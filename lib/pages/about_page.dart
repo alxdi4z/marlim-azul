@@ -30,7 +30,7 @@ class _AboutPageState extends State<AboutPage> {
             SizedBox(
               width: mobile ? width * .9 : width * .5,
               child: const Text(
-                "\t\tEsse projeto foi criado como trabalho de conclusão de curso "
+                "Esse projeto foi criado como trabalho de conclusão de curso "
                 "para a instituição universitária Libertas Faculdades Integradas, "
                 "no curso de Sistemas de Informação.",
                 style: TextStyle(

@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                   TextSpan(
                       text:
-                          "\t\tGrande parte das pessoas não tem conhecimento de como "
+                          "Grande parte das pessoas não tem conhecimento de como "
                           "navegar na internet com segurança, por isso, acabam caindo "
                           "nos mais diversos tipos de ataques.",
                       style: fontStyle(fontSize, false))
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                   text: TextSpan(style: fontStyle(fontSize, false), children: [
                 const TextSpan(
                     text:
-                        "\t\tO Brasil é um dos países com o maior número de ataques "
+                        "O Brasil é um dos países com o maior número de ataques "
                         "cibernéticos no mundo.\nDentre eles os mais comuns são "),
                 TextSpan(
                     text:
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                 const TextSpan(text: ".\n"),
                 const TextSpan(
                     text:
-                        "\t\tNo início do ano de 2021 foram vazados mais de 223 milhões de CPFs, "
+                        "No início do ano de 2021 foram vazados mais de 223 milhões de CPFs, "
                         "números de celulares, contas de e-mails, entre outros dados.\nEstes, sendo até colocados à venda na internet.")
               ]))
             ],
@@ -142,13 +142,13 @@ class _HomePageState extends State<HomePage> {
               const Padding(padding: EdgeInsets.only(bottom: 20)),
               RichText(
                   text: TextSpan(style: fontStyle(fontSize, false), children: [
-                const TextSpan(text: "\t\tO "),
+                const TextSpan(text: "O "),
                 TextSpan(
                     text: "Marlim Azul ", style: fontStyle(fontSize, true)),
                 const TextSpan(
                     text: "é um projeto que foi desenvolvido com o propósito "
                         "de instruir como navegar na internet com mais segurança.\n"
-                        "\t\tApresentando os tipos mais comuns de ataques e mostrando como "
+                        "Apresentando os tipos mais comuns de ataques e mostrando como "
                         "identificá-los e evitá-los.")
               ]))
             ],

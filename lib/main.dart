@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/pages/page_imp.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 
-void main() {
+Future main() async {
+  await dot_env.load(fileName: ".env");
   runApp(const MyApp());
 }
 

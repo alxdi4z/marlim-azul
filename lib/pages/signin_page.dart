@@ -36,6 +36,7 @@ class SignInPageState extends State<SignInPage> {
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
+            controller: ScrollController(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -74,13 +75,13 @@ class SignInPageState extends State<SignInPage> {
                                       children: [
                                     TextSpan(
                                         text:
-                                            "\t\tO Marlim se preocupa com sua segurança, "
+                                            "O Marlim se preocupa com sua segurança, "
                                             "por isso queremos que você esteja sempre "
                                             "atualizado sobre como se prevenir às novas formas de ataque "
                                             "que surgem por aí.\n"),
                                     TextSpan(
                                         text:
-                                            "\t\tSe inscreva agora mesmo na nossa "),
+                                            "Se inscreva agora mesmo na nossa "),
                                     TextSpan(
                                         text: "newsletter ",
                                         style: TextStyle(color: primaryColor)),
@@ -142,7 +143,7 @@ class SignInPageState extends State<SignInPage> {
                               onPressed: () {
                                 final form = _formKey.currentState!;
                                 if (form.validate()) {
-                                  print("sucesso");
+                                  print("done");
                                 }
                               },
                             ),
@@ -174,4 +175,6 @@ class SignInPageState extends State<SignInPage> {
           ),
         ));
   }
+
+  Future sendEmail(String client_email, String subject, String html) async {}
 }

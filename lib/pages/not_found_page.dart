@@ -20,6 +20,7 @@ class NotFoundPage extends StatelessWidget {
         height: height,
         width: size.width,
         child: SingleChildScrollView(
+          controller: ScrollController(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -72,7 +73,7 @@ class NotFoundPage extends StatelessWidget {
                   "Nada para ver aqui...",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: fontSize,
+                    fontSize: fontSize * 1.7,
                     fontFamily: "Righteous",
                     shadows: <Shadow>[
                       Shadow(
