@@ -1,27 +1,38 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
+import 'package:marlinazul_frontend/functions.dart';
+import 'package:marlinazul_frontend/pages/page_custom_view.dart';
+import 'package:marlinazul_frontend/pages/page_impl.dart';
 import 'package:marlinazul_frontend/widgets/logo.dart';
 import 'package:marlinazul_frontend/widgets/row_box.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+const path = "/";
+const title = "Home";
+const showInBar = false;
+const highlight = false;
+
+class HomePage extends PageImpl {
+  const HomePage({Key? key})
+      : super(
+            key: key,
+            path: "/",
+            title: "Home",
+            showInBar: false,
+            highlight: false);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<PageImpl> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    bool mobile = size.width <= 800;
-    return view(mobile, size);
-  }
+  Widget build(BuildContext context) =>
+      PageCustomView(view: view(context), path: widget.path);
 
-  Widget view(bool mobile, Size size) {
+  Widget view(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    bool mobile = checkMobile(size.width);
     double height = size.height - desktopBarHeight;
 
     List<Widget> bloco1 = [

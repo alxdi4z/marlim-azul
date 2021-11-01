@@ -1,20 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:marlinazul_frontend/functions.dart';
 import 'package:marlinazul_frontend/pages/home_page.dart';
+import 'package:marlinazul_frontend/pages/page_custom_view.dart';
+import 'package:marlinazul_frontend/pages/page_impl.dart';
 
 import '../constants.dart';
 
-class NotFoundPage extends StatelessWidget {
-  const NotFoundPage({Key? key}) : super(key: key);
+const highlight = false;
+const path = "/404";
+const showInBar = false;
+const title = "404";
+
+class NotFoundPage extends PageImpl {
+  const NotFoundPage({Key? key})
+      : super(
+          key: key,
+          highlight: highlight,
+          path: path,
+          showInBar: showInBar,
+          title: title,
+        );
 
   @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    bool mobile = size.width <= 800;
-    return view(mobile, size, context);
-  }
+  State<PageImpl> createState() => _NotFoundPageState();
+}
 
-  Widget view(bool mobile, Size size, BuildContext context) {
+class _NotFoundPageState extends State<NotFoundPage> {
+  @override
+  Widget build(BuildContext context) =>
+      PageCustomView(view: view(context), path: widget.path);
+
+  Widget view(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    bool mobile = checkMobile(size.width);
+
     double height = size.height - (mobile ? mobileBarHeight : desktopBarHeight);
     return SizedBox(
         height: height,

@@ -3,24 +3,26 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
-import 'package:marlinazul_frontend/pages/page_info.dart';
 import 'package:marlinazul_frontend/widgets/custom_drawer.dart';
 import 'package:marlinazul_frontend/widgets/logo.dart';
 import 'package:marlinazul_frontend/widgets/custom_tab_bar.dart';
 
 import 'home_page.dart';
 
-class PageImp extends StatefulWidget {
-  final PageInfo pageInfo;
+class PageCustomView extends StatefulWidget {
+  final Widget view;
+  final String path;
 
-  const PageImp({Key? key, required this.pageInfo}) : super(key: key);
+  const PageCustomView({Key? key, required this.view, required this.path})
+      : super(key: key);
 
   @override
-  _PageImpState createState() => _PageImpState();
+  _PageCustomViewState createState() => _PageCustomViewState();
 }
 
-class _PageImpState extends State<PageImp> {
+class _PageCustomViewState extends State<PageCustomView> {
   late Size screenSize;
+  HomePage homePage = const HomePage();
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -34,7 +36,7 @@ class _PageImpState extends State<PageImp> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: backgroundColor,
-      endDrawer: customDrawer(widget.pageInfo.path, context),
+      endDrawer: customDrawer(widget.path, context),
       key: scaffoldKey,
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -60,7 +62,7 @@ class _PageImpState extends State<PageImp> {
             color: Colors.transparent,
             height: size.height - mobileBarHeight,
             width: size.width,
-            child: widget.pageInfo.page,
+            child: widget.view,
           )
         ],
       ),
@@ -75,7 +77,7 @@ class _PageImpState extends State<PageImp> {
           color: Colors.transparent,
           height: size.height - desktopBarHeight,
           width: size.width,
-          child: widget.pageInfo.page,
+          child: widget.view,
         )
       ],
     );
@@ -102,9 +104,8 @@ class _PageImpState extends State<PageImp> {
               hoverColor: primaryColor.withOpacity(0.1),
               highlightColor: primaryColor.withOpacity(0.6),
               onTap: () {
-                String homeRoute = getRoute(const HomePage());
-                if (homeRoute != widget.pageInfo.path) {
-                  Navigator.pushNamed(context, homeRoute);
+                if (homePage.path != widget.path) {
+                  Navigator.pushNamed(context, homePage.path);
                 }
               },
               child: Padding(
@@ -128,7 +129,7 @@ class _PageImpState extends State<PageImp> {
                 ),
               )),
           const Spacer(),
-          CustomTabBar(path: widget.pageInfo.path)
+          CustomTabBar(path: widget.path)
         ],
       ),
     );
@@ -154,9 +155,8 @@ class _PageImpState extends State<PageImp> {
                   hoverColor: primaryColor.withOpacity(0.1),
                   highlightColor: primaryColor.withOpacity(0.6),
                   onTap: () {
-                    String homeRoute = getRoute(const HomePage());
-                    if (homeRoute != widget.pageInfo.path) {
-                      Navigator.pushNamed(context, homeRoute);
+                    if (homePage.path != widget.path) {
+                      Navigator.pushNamed(context, homePage.path);
                     }
                   },
                   child: Padding(

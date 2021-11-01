@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
+import 'package:marlinazul_frontend/functions.dart';
+import 'package:marlinazul_frontend/pages/page_custom_view.dart';
+import 'package:marlinazul_frontend/pages/page_impl.dart';
 import 'package:marlinazul_frontend/widgets/email_text_field.dart';
 import 'package:marlinazul_frontend/widgets/row_box.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+const title = "Inscreva-se";
+const path = "/signin";
+const showInBar = true;
+const highlight = true;
+
+class SignInPage extends PageImpl {
+  final Map<String, String>? queryParameters;
+
+  const SignInPage({Key? key, this.queryParameters})
+      : super(
+            key: key,
+            highlight: highlight,
+            path: path,
+            showInBar: showInBar,
+            title: title);
 
   @override
-  SignInPageState createState() => SignInPageState();
+  State<PageImpl> createState() => _SignInPageState();
 }
 
-class SignInPageState extends State<SignInPage> {
+class _SignInPageState extends State<SignInPage> {
   final textController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -22,13 +38,12 @@ class SignInPageState extends State<SignInPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    bool mobile = size.width <= 800;
-    return view(mobile, size, context);
-  }
+  Widget build(BuildContext context) =>
+      PageCustomView(view: view(context), path: widget.path);
 
-  Widget view(bool mobile, Size size, BuildContext context) {
+  Widget view(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    bool mobile = checkMobile(size.width);
     double height = size.height - (mobile ? mobileBarHeight : desktopBarHeight);
     return SizedBox(
         height: height,
@@ -176,5 +191,5 @@ class SignInPageState extends State<SignInPage> {
         ));
   }
 
-  Future sendEmail(String client_email, String subject, String html) async {}
+  Future sendEmail(String clientEmail, String subject, String html) async {}
 }

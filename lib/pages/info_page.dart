@@ -5,14 +5,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
-import 'package:marlinazul_frontend/functions.dart';
-import 'package:marlinazul_frontend/widgets/custom_alert.dart';
+import 'package:marlinazul_frontend/pages/page_custom_view.dart';
+import 'package:marlinazul_frontend/pages/page_impl.dart';
 
-class InfoPage extends StatefulWidget {
-  const InfoPage({Key? key}) : super(key: key);
+import '../functions.dart';
+
+const highlight = false;
+const path = "/info";
+const showInBar = true;
+const title = "Info";
+
+class InfoPage extends PageImpl {
+  final Map<String, String>? queryParameters;
+
+  const InfoPage({Key? key, this.queryParameters})
+      : super(
+            key: key,
+            highlight: highlight,
+            path: path,
+            showInBar: showInBar,
+            title: title);
 
   @override
-  _InfoPageState createState() => _InfoPageState();
+  State<PageImpl> createState() => _InfoPageState();
 }
 
 class _InfoPageState extends State<InfoPage> {
@@ -21,28 +36,8 @@ class _InfoPageState extends State<InfoPage> {
   LocationData? _locationData;
 
   @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-    initLocationState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    bool mobile = size.width <= 800;
-    return view(mobile, size, context);
-  }
-
-  Widget view(bool mobile, Size size, BuildContext context) {
-    return Center(
-      child: Container(
-        color: Colors.green,
-        height: 500,
-        width: 500,
-      ),
-    );
-  }
+  Widget build(BuildContext context) =>
+      PageCustomView(view: view(context), path: widget.path);
 
   Future<void> initPlatformState() async {
     var data = <String, dynamic>{};
@@ -102,5 +97,15 @@ class _InfoPageState extends State<InfoPage> {
     setState(() {
       _locationData = data;
     });
+  }
+
+  Widget view(BuildContext context) {
+    return Center(
+      child: Container(
+        color: Colors.green,
+        height: 500,
+        width: 500,
+      ),
+    );
   }
 }

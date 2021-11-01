@@ -1,25 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
+import 'package:marlinazul_frontend/functions.dart';
+import 'package:marlinazul_frontend/pages/page_custom_view.dart';
+import 'package:marlinazul_frontend/pages/page_impl.dart';
 import 'package:marlinazul_frontend/widgets/logo.dart';
 import 'package:marlinazul_frontend/widgets/row_box.dart';
 
-class AboutPage extends StatefulWidget {
-  const AboutPage({Key? key}) : super(key: key);
+const highlight = false;
+const path = "/about";
+const showInBar = true;
+const title = "Sobre";
+
+class AboutPage extends PageImpl {
+  const AboutPage({Key? key})
+      : super(
+            key: key,
+            highlight: false,
+            path: "/about",
+            showInBar: true,
+            title: "Sobre");
 
   @override
-  _AboutPageState createState() => _AboutPageState();
+  State<PageImpl> createState() => _AboutPageState();
 }
 
 class _AboutPageState extends State<AboutPage> {
   @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    bool mobile = size.width <= 800;
-    return view(mobile, size);
-  }
+  Widget build(BuildContext context) =>
+      PageCustomView(view: view(context), path: widget.path);
 
-  Widget view(bool mobile, Size size) {
+  Widget view(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    bool mobile = checkMobile(size.width);
     double width = mobile ? size.width : size.width * .7;
 
     return SingleChildScrollView(

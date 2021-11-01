@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:marlinazul_frontend/pages/page_custom_view.dart';
+import 'package:marlinazul_frontend/pages/page_impl.dart';
 
-class TakeCarePage extends StatefulWidget {
-  const TakeCarePage({Key? key}) : super(key: key);
+const highlight = false;
+const path = "/takecare";
+const showInBar = true;
+const title = "Cuide-se";
+
+class TakeCarePage extends PageImpl {
+  const TakeCarePage({Key? key})
+      : super(
+            key: key,
+            highlight: highlight,
+            path: path,
+            showInBar: showInBar,
+            title: title);
 
   @override
-  _TakeCarePageState createState() => _TakeCarePageState();
+  State<PageImpl> createState() => _TakeCarePageState();
 }
 
 class _TakeCarePageState extends State<TakeCarePage> {
   @override
-  Widget build(BuildContext context) {
-    bool mobile = MediaQuery.of(context).size.width <= 715;
-    return view(mobile);
-  }
+  Widget build(BuildContext context) =>
+      PageCustomView(view: view(context), path: widget.path);
 
-  Widget view(bool mobile) {
+  Widget view(BuildContext context) {
     return Container();
   }
 }

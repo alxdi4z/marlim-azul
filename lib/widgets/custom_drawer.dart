@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
-import 'package:marlinazul_frontend/pages/page_imp.dart';
+import 'package:marlinazul_frontend/pages/page_impl.dart';
 
 Widget customDrawer(String path, BuildContext context) {
-  List<PageImp> pagesToShow =
-      pageList.where((item) => item.pageInfo.showInBar == true).toList();
+  List<PageImpl> pagesToShow =
+      pageList.where((page) => page.showInBar == true).toList();
   return Drawer(
     child: Container(
       decoration: BoxDecoration(
@@ -31,7 +31,7 @@ Widget customDrawer(String path, BuildContext context) {
                   )
                 ] +
                 pagesToShow.map((page) {
-                  bool selectedPage = page.pageInfo.path == path;
+                  bool selectedPage = page.path == path;
                   return Padding(
                       padding: const EdgeInsets.all(5),
                       child: Container(
@@ -51,7 +51,7 @@ Widget customDrawer(String path, BuildContext context) {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
                           title: Text(
-                            page.pageInfo.title,
+                            page.title,
                             style: TextStyle(
                                 color:
                                     selectedPage ? primaryColor : Colors.white,
@@ -60,7 +60,7 @@ Widget customDrawer(String path, BuildContext context) {
                           onTap: () {
                             if (!selectedPage) {
                               Navigator.of(context).pop();
-                              Navigator.pushNamed(context, page.pageInfo.path);
+                              Navigator.pushNamed(context, page.path);
                             }
                           },
                         ),

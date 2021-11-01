@@ -1,6 +1,8 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 
+bool checkMobile(double width) => width <= 800;
+
 Map<String, dynamic> readAndroidBuildData(AndroidDeviceInfo build) {
   return <String, dynamic>{
     'version.securityPatch': build.version.securityPatch,

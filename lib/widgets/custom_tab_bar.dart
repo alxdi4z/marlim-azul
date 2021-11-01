@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
-import 'package:marlinazul_frontend/pages/page_imp.dart';
+import 'package:marlinazul_frontend/pages/page_impl.dart';
 
 class CustomTabBar extends StatelessWidget {
   final String path;
@@ -24,11 +24,11 @@ class CustomTabBar extends StatelessWidget {
         fontWeight: FontWeight.bold,
         fontFamily: "Righteous");
 
-    List<PageImp> pagesToShow =
-        pageList.where((item) => item.pageInfo.showInBar).toList();
+    List<PageImpl> pagesToShow =
+        pageList.where((page) => page.showInBar).toList();
     return Row(
-        children: pagesToShow.map((pageContainer) {
-      bool selectedPage = pageContainer.pageInfo.path == path;
+        children: pagesToShow.map((page) {
+      bool selectedPage = page.path == path;
       return InkWell(
         borderRadius: BorderRadius.circular(15),
         hoverColor: primaryColor.withOpacity(0.1),
@@ -36,13 +36,13 @@ class CustomTabBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(
-            pageContainer.pageInfo.title,
+            page.title,
             style: selectedPage ? styteSelected : styleDefault,
           ),
         ),
         onTap: () {
           if (!selectedPage) {
-            Navigator.pushNamed(context, pageContainer.pageInfo.path);
+            Navigator.pushNamed(context, page.path);
           }
         },
       );
