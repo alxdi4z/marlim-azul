@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
-import 'package:marlinazul_frontend/pages/page_impl.dart';
+import 'package:marlinazul_frontend/widgets/page_impl.dart';
 
 Widget customDrawer(String path, BuildContext context) {
   List<PageImpl> pagesToShow =
-      pageList.where((page) => page.showInBar == true).toList();
+      pagesList.where((page) => page.visible == true).toList();
   return Drawer(
     child: Container(
       decoration: BoxDecoration(

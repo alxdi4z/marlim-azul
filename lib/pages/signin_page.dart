@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
-import 'package:marlinazul_frontend/pages/page_custom_view.dart';
-import 'package:marlinazul_frontend/pages/page_impl.dart';
+import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
+import 'package:marlinazul_frontend/widgets/page_impl.dart';
 import 'package:marlinazul_frontend/widgets/email_text_field.dart';
 import 'package:marlinazul_frontend/widgets/row_box.dart';
 
@@ -20,7 +20,7 @@ class SignInPage extends PageImpl {
             key: key,
             highlight: highlight,
             path: path,
-            showInBar: showInBar,
+            visible: showInBar,
             title: title);
 
   @override
@@ -45,7 +45,8 @@ class _SignInPageState extends State<SignInPage> {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
     double height = size.height - (mobile ? mobileBarHeight : desktopBarHeight);
-    return SizedBox(
+    return Container(
+        alignment: Alignment.center,
         height: height,
         width: size.width,
         child: Form(

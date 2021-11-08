@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
-import 'package:marlinazul_frontend/pages/page_custom_view.dart';
-import 'package:marlinazul_frontend/pages/page_impl.dart';
+import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
+import 'package:marlinazul_frontend/widgets/page_impl.dart';
 import 'package:marlinazul_frontend/widgets/logo.dart';
 import 'package:marlinazul_frontend/widgets/row_box.dart';
 
@@ -18,7 +18,7 @@ class AboutPage extends PageImpl {
             key: key,
             highlight: false,
             path: "/about",
-            showInBar: true,
+            visible: true,
             title: "Sobre");
 
   @override
@@ -66,7 +66,7 @@ class _AboutPageState extends State<AboutPage> {
             ),
           ], width: width),
           const Padding(
-              padding: EdgeInsets.only(top: 30),
+              padding: EdgeInsets.only(top: 30, bottom: 20),
               child: Text(
                 "Tecnologias utilizadas:",
                 style: TextStyle(

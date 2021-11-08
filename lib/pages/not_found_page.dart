@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/functions.dart';
 import 'package:marlinazul_frontend/pages/home_page.dart';
-import 'package:marlinazul_frontend/pages/page_custom_view.dart';
-import 'package:marlinazul_frontend/pages/page_impl.dart';
+import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
+import 'package:marlinazul_frontend/widgets/page_impl.dart';
 
 import '../constants.dart';
 
@@ -18,7 +18,7 @@ class NotFoundPage extends PageImpl {
           key: key,
           highlight: highlight,
           path: path,
-          showInBar: showInBar,
+          visible: showInBar,
           title: title,
         );
 
@@ -36,7 +36,8 @@ class _NotFoundPageState extends State<NotFoundPage> {
     bool mobile = checkMobile(size.width);
 
     double height = size.height - (mobile ? mobileBarHeight : desktopBarHeight);
-    return SizedBox(
+    return Container(
+        alignment: Alignment.center,
         height: height,
         width: size.width,
         child: SingleChildScrollView(

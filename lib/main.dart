@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 import 'package:marlinazul_frontend/pages/about_page.dart';
 import 'package:marlinazul_frontend/pages/info_page.dart';
 import 'package:marlinazul_frontend/pages/not_found_page.dart';
-import 'package:marlinazul_frontend/pages/page_impl.dart';
+import 'package:marlinazul_frontend/widgets/page_impl.dart';
 import 'package:marlinazul_frontend/pages/signin_page.dart';
 import 'package:marlinazul_frontend/pages/take_care.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    PageImpl homePage = pageList.firstWhere((page) => page.path == "/");
+    PageImpl homePage = pagesList.firstWhere((page) => page.path == "/");
     return MaterialApp(
       title: 'O Marlin Azul',
       debugShowCheckedModeBanner: false,

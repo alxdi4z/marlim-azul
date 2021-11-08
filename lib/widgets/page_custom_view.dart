@@ -7,7 +7,7 @@ import 'package:marlinazul_frontend/widgets/custom_drawer.dart';
 import 'package:marlinazul_frontend/widgets/logo.dart';
 import 'package:marlinazul_frontend/widgets/custom_tab_bar.dart';
 
-import 'home_page.dart';
+import '../pages/home_page.dart';
 
 class PageCustomView extends StatefulWidget {
   final Widget view;

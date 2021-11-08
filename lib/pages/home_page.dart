@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
-import 'package:marlinazul_frontend/pages/page_custom_view.dart';
-import 'package:marlinazul_frontend/pages/page_impl.dart';
+import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
+import 'package:marlinazul_frontend/widgets/page_impl.dart';
 import 'package:marlinazul_frontend/widgets/logo.dart';
 import 'package:marlinazul_frontend/widgets/row_box.dart';
 
@@ -18,7 +18,7 @@ class HomePage extends PageImpl {
             key: key,
             path: "/",
             title: "Home",
-            showInBar: false,
+            visible: false,
             highlight: false);
 
   @override

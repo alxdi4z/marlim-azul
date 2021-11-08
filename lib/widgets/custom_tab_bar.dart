@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
-import 'package:marlinazul_frontend/pages/page_impl.dart';
+import 'package:marlinazul_frontend/widgets/page_impl.dart';
 
 class CustomTabBar extends StatelessWidget {
   final String path;
@@ -25,7 +25,7 @@ class CustomTabBar extends StatelessWidget {
         fontFamily: "Righteous");
 
     List<PageImpl> pagesToShow =
-        pageList.where((page) => page.showInBar).toList();
+        pagesList.where((page) => page.visible).toList();
     return Row(
         children: pagesToShow.map((page) {
       bool selectedPage = page.path == path;
