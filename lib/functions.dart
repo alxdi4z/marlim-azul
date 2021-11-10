@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/widgets/page_impl.dart';
 
-bool checkMobile(double width) => width <= 800;
+bool checkMobile(double width) => width <= 720;
 
 String getRoute(PageImpl page) {
   try {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/functions.dart';
-import 'package:marlinazul_frontend/widgets/card_content_viewer.dart';
 import 'package:marlinazul_frontend/widgets/custom_card.dart';
 import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
 import 'package:marlinazul_frontend/widgets/page_impl.dart';
@@ -36,18 +35,17 @@ class _TakeCarePageState extends State<TakeCarePage> {
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      // child: CustomCard(
-      //     title: "Phishing",
-      //     subtitle: "Phishing e como se defender",
-      //     description:
-      //         "Aprenda a se defender do phishing da melhor maneira possível",
-      //     width: size.width * .3,
-      //     logoUrl: "images/phishing.jpg",
-      //     height: 800,
-      //     onClick: () {}),
-      child: Container(),
+    return SingleChildScrollView(
+      controller: ScrollController(),
+      child: Column(
+        children: [
+          Wrap(
+            direction: Axis.horizontal,
+            alignment: WrapAlignment.start,
+            children: [],
+          ),
+        ],
+      ),
     );
   }
 }

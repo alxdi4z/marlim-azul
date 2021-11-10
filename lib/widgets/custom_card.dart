@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomCard extends StatefulWidget {
   final String title;
   final String? subtitle;
   final String description;
   final String? logoUrl;
   final double width;
-  final double height;
   final Function onClick;
 
   const CustomCard(
@@ -20,72 +19,94 @@ class CustomCard extends StatelessWidget {
       this.logoUrl,
       this.subtitle,
       required this.width,
-      required this.height,
       required this.onClick})
       : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
+  Color _borderColor = secondaryColor.withOpacity(0.4);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
     return InkWell(
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          clipBehavior: Clip.antiAlias,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 400),
-            child: Container(
-              color: Colors.yellow,
-              height: height,
-              width: width,
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        image: logoUrl != null
-                            ? DecorationImage(
-                                image: AssetImage(logoUrl!),
-                                fit: BoxFit.cover,
-                                colorFilter: const ColorFilter.mode(
-                                    Colors.black54, BlendMode.darken))
-                            : null),
-                    padding: const EdgeInsets.all(15),
-                    width: width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSize * 1.3,
-                              fontFamily: "Righteous"),
-                        ),
-                        subtitle != null
-                            ? Text(
-                                subtitle!,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.86),
-                                    fontSize: fontSize),
-                              )
-                            : Container()
-                      ],
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 300),
+        child: Container(
+          padding: const EdgeInsets.all(11),
+          decoration: BoxDecoration(
+              border: Border.all(
+                  color: _borderColor, width: 4, style: BorderStyle.solid),
+              borderRadius: BorderRadius.circular(25),
+              image: widget.logoUrl != null
+                  ? DecorationImage(
+                      image: AssetImage(widget.logoUrl!),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(.86), BlendMode.darken))
+                  : null),
+          height: 300,
+          width: widget.width,
+          alignment: Alignment.topLeft,
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.title,
+                      style: const TextStyle(
+                          color: primaryColor,
+                          fontSize: fontSize * 1.3,
+                          fontFamily: "Righteous"),
                     ),
-                  ),
-                  Container(
-                    color: backgroundColor.withOpacity(.8),
-                    child: Text(description,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: Colors.white, fontSize: fontSize)),
-                  )
-                ],
+                    widget.subtitle != null
+                        ? Text(
+                            widget.subtitle!,
+                            style: TextStyle(
+                                color: secondaryColor.withOpacity(0.86),
+                                fontSize: fontSize),
+                          )
+                        : Container()
+                  ],
+                ),
               ),
-            ),
-          )),
+              Divider(
+                color: Colors.white.withOpacity(0.86),
+                height: 20,
+              ),
+              Container(
+                child: SingleChildScrollView(
+                  controller: ScrollController(),
+                  child: Column(
+                    children: [
+                      Text(widget.description,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: fontSize))
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      onTap: () {},
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onHover: (isHovering) {
+        setState(() {
+          _borderColor =
+              isHovering ? primaryColor : secondaryColor.withOpacity(0.4);
+        });
+      },
+      borderRadius: BorderRadius.circular(20),
     );
   }
 }
