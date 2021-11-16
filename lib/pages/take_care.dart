@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
+import 'package:marlinazul_frontend/pages/blog_pages/clickjacking_blog_page.dart';
+import 'package:marlinazul_frontend/pages/blog_pages/more_to_come_page.dart';
+import 'package:marlinazul_frontend/pages/blog_pages/phishing_blog_page.dart';
+import 'package:marlinazul_frontend/pages/blog_pages/spoofing_blog_page.dart';
 import 'package:marlinazul_frontend/widgets/custom_card.dart';
 import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
 import 'package:marlinazul_frontend/widgets/page_impl.dart';
@@ -11,12 +16,7 @@ const title = "Cuide-se";
 
 class TakeCarePage extends PageImpl {
   const TakeCarePage({Key? key})
-      : super(
-            key: key,
-            highlight: highlight,
-            path: path,
-            visible: showInBar,
-            title: title);
+      : super(key: key, path: path, visible: showInBar, title: title);
 
   @override
   State<PageImpl> createState() => _TakeCarePageState();
@@ -29,22 +29,63 @@ class _TakeCarePageState extends State<TakeCarePage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      PageCustomView(view: view(context), path: widget.path);
+  Widget build(BuildContext context) => PageCustomView(
+        view: view(context),
+        path: widget.path,
+        backButton: false,
+      );
 
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
-    return SingleChildScrollView(
-      controller: ScrollController(),
-      child: Column(
-        children: [
-          Wrap(
-            direction: Axis.horizontal,
-            alignment: WrapAlignment.start,
-            children: [],
-          ),
-        ],
+    double cardWidth = mobile ? size.width * .9 : size.width * .4;
+    return Container(
+      height: size.height - (mobile ? mobileBarHeight : desktopBarHeight),
+      alignment: Alignment.topCenter,
+      width: size.width,
+      child: SingleChildScrollView(
+        controller: ScrollController(),
+        child: Column(
+          children: [
+            Wrap(
+              direction: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: CustomCard(
+                    page: const PhishingBlogPage(),
+                    width: cardWidth,
+                    clickable: true,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: CustomCard(
+                    page: const ClickjackingBlogPage(),
+                    width: cardWidth,
+                    clickable: true,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: CustomCard(
+                    page: const SpoofingBlogPage(),
+                    width: cardWidth,
+                    clickable: true,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: CustomCard(
+                    page: const MoreToComePage(),
+                    width: cardWidth,
+                    clickable: false,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 import 'package:marlinazul_frontend/pages/about_page.dart';
 import 'package:marlinazul_frontend/pages/info_page.dart';
 import 'package:marlinazul_frontend/pages/not_found_page.dart';
@@ -8,8 +7,7 @@ import 'package:marlinazul_frontend/widgets/page_impl.dart';
 import 'package:marlinazul_frontend/pages/signin_page.dart';
 import 'package:marlinazul_frontend/pages/take_care.dart';
 
-Future main() async {
-  await dot_env.load(fileName: ".env");
+void main() {
   runApp(const MyApp());
 }
 

@@ -38,9 +38,7 @@ dependencies:
   device_info_plus: ^3.1.0
   flutter_svg: ^0.23.0+1
   email_validator: ^2.0.1
-  flutter_dotenv: ^4.0.0-nullsafety.0
-  postgres: ^2.4.1+2
-  geocode: ^1.0.1
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:
@@ -71,7 +69,6 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
-    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -16,7 +16,6 @@ class NotFoundPage extends PageImpl {
   const NotFoundPage({Key? key})
       : super(
           key: key,
-          highlight: highlight,
           path: path,
           visible: showInBar,
           title: title,
@@ -28,8 +27,11 @@ class NotFoundPage extends PageImpl {
 
 class _NotFoundPageState extends State<NotFoundPage> {
   @override
-  Widget build(BuildContext context) =>
-      PageCustomView(view: view(context), path: widget.path);
+  Widget build(BuildContext context) => PageCustomView(
+        view: view(context),
+        path: widget.path,
+        backButton: false,
+      );
 
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;

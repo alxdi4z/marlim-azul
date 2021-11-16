@@ -14,12 +14,7 @@ const highlight = false;
 
 class HomePage extends PageImpl {
   const HomePage({Key? key})
-      : super(
-            key: key,
-            path: "/",
-            title: "Home",
-            visible: false,
-            highlight: false);
+      : super(key: key, path: "/", title: "Home", visible: false);
 
   @override
   State<PageImpl> createState() => _HomePageState();
@@ -27,8 +22,11 @@ class HomePage extends PageImpl {
 
 class _HomePageState extends State<HomePage> {
   @override
-  Widget build(BuildContext context) =>
-      PageCustomView(view: view(context), path: widget.path);
+  Widget build(BuildContext context) => PageCustomView(
+        view: view(context),
+        path: widget.path,
+        backButton: false,
+      );
 
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;

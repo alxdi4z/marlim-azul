@@ -14,12 +14,7 @@ const title = "Sobre";
 
 class AboutPage extends PageImpl {
   const AboutPage({Key? key})
-      : super(
-            key: key,
-            highlight: false,
-            path: "/about",
-            visible: true,
-            title: "Sobre");
+      : super(key: key, path: "/about", visible: true, title: "Sobre");
 
   @override
   State<PageImpl> createState() => _AboutPageState();
@@ -27,8 +22,11 @@ class AboutPage extends PageImpl {
 
 class _AboutPageState extends State<AboutPage> {
   @override
-  Widget build(BuildContext context) =>
-      PageCustomView(view: view(context), path: widget.path);
+  Widget build(BuildContext context) => PageCustomView(
+        view: view(context),
+        path: widget.path,
+        backButton: false,
+      );
 
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;

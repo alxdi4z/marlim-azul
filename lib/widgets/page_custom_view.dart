@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
+import 'package:marlinazul_frontend/functions.dart';
+import 'package:marlinazul_frontend/pages/take_care.dart';
 import 'package:marlinazul_frontend/widgets/custom_drawer.dart';
 import 'package:marlinazul_frontend/widgets/logo.dart';
 import 'package:marlinazul_frontend/widgets/custom_tab_bar.dart';
@@ -11,9 +13,11 @@ import '../pages/home_page.dart';
 
 class PageCustomView extends StatefulWidget {
   final Widget view;
-  final String path;
+  final String? path;
+  final bool backButton;
 
-  const PageCustomView({Key? key, required this.view, required this.path})
+  const PageCustomView(
+      {Key? key, required this.view, this.path, required this.backButton})
       : super(key: key);
 
   @override
@@ -33,21 +37,50 @@ class _PageCustomViewState extends State<PageCustomView> {
   @override
   Widget build(BuildContext context) {
     screenSize = MediaQuery.of(context).size;
+    bool mobile = checkMobile(screenSize.width);
     return SafeArea(
         child: Scaffold(
+      floatingActionButton: widget.backButton
+          ? Padding(
+              padding: EdgeInsets.only(
+                  top: (mobile ? mobileBarHeight : desktopBarHeight) + 25),
+              child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, const TakeCarePage().path!);
+                  },
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateColor.resolveWith(
+                          (states) => backgroundColor),
+                      elevation:
+                          MaterialStateProperty.resolveWith((states) => 15),
+                      side: MaterialStateBorderSide.resolveWith((states) =>
+                          const BorderSide(
+                              color: primaryColor,
+                              style: BorderStyle.solid,
+                              width: 4)),
+                      shape: MaterialStateProperty.resolveWith(
+                          (states) => const CircleBorder())),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      color: primaryColor,
+                    ),
+                  )),
+            )
+          : null,
+      floatingActionButtonLocation: mobile
+          ? FloatingActionButtonLocation.miniEndFloat
+          : FloatingActionButtonLocation.miniStartTop,
       backgroundColor: backgroundColor,
-      endDrawer: customDrawer(widget.path, context),
+      endDrawer: mobile ? customDrawer(context, path: widget.path) : null,
       key: scaffoldKey,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          return ConstrainedBox(
-              constraints: BoxConstraints(minHeight: screenSize.height),
-              child: SizedBox(
-                  height: screenSize.height,
-                  width: screenSize.width,
-                  child: constraints.maxWidth > 800
-                      ? desktopView(screenSize)
-                      : mobileView(screenSize)));
+          return Container(
+              child: constraints.maxWidth > 800
+                  ? desktopView(screenSize)
+                  : mobileView(screenSize));
         },
       ),
     ));
@@ -61,7 +94,6 @@ class _PageCustomViewState extends State<PageCustomView> {
           Container(
             color: Colors.transparent,
             height: size.height - mobileBarHeight,
-            width: size.width,
             child: widget.view,
           )
         ],
@@ -76,7 +108,6 @@ class _PageCustomViewState extends State<PageCustomView> {
         Container(
           color: Colors.transparent,
           height: size.height - desktopBarHeight,
-          width: size.width,
           child: widget.view,
         )
       ],
@@ -104,8 +135,8 @@ class _PageCustomViewState extends State<PageCustomView> {
               hoverColor: primaryColor.withOpacity(0.1),
               highlightColor: primaryColor.withOpacity(0.6),
               onTap: () {
-                if (homePage.path != widget.path) {
-                  Navigator.pushNamed(context, homePage.path);
+                if (homePage.path != widget.path && homePage.path != null) {
+                  Navigator.pushNamed(context, homePage.path!);
                 }
               },
               child: Padding(
@@ -155,8 +186,8 @@ class _PageCustomViewState extends State<PageCustomView> {
                   hoverColor: primaryColor.withOpacity(0.1),
                   highlightColor: primaryColor.withOpacity(0.6),
                   onTap: () {
-                    if (homePage.path != widget.path) {
-                      Navigator.pushNamed(context, homePage.path);
+                    if (homePage.path != widget.path && homePage.path != null) {
+                      Navigator.pushNamed(context, homePage.path!);
                     }
                   },
                   child: Padding(

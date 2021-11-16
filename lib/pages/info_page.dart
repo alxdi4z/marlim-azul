@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geocode/geocode.dart';
 import 'package:location/location.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
@@ -24,12 +23,7 @@ class InfoPage extends PageImpl {
   final Map<String, String>? queryParameters;
 
   const InfoPage({Key? key, this.queryParameters})
-      : super(
-            key: key,
-            highlight: highlight,
-            path: path,
-            visible: showInBar,
-            title: title);
+      : super(key: key, path: path, visible: showInBar, title: title);
 
   @override
   State<PageImpl> createState() => _InfoPageState();
@@ -48,8 +42,11 @@ class _InfoPageState extends State<InfoPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      PageCustomView(view: view(context), path: widget.path);
+  Widget build(BuildContext context) => PageCustomView(
+        view: view(context),
+        path: widget.path,
+        backButton: false,
+      );
 
   Future getPlatform() async {
     var result = <String, dynamic>{};
@@ -88,7 +85,6 @@ class _InfoPageState extends State<InfoPage> {
 
   Future getLocation() async {
     Location location = Location();
-    GeoCode geoCode = GeoCode();
 
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
@@ -130,15 +126,10 @@ class _InfoPageState extends State<InfoPage> {
       return;
     }
 
-    Address add = await geoCode.reverseGeocoding(
-        latitude: data.latitude!, longitude: data.longitude!);
-
     setState(() {
       _locationData = {
         "Latitude": data.latitude,
         "Longitude": data.longitude,
-        "Cidade": add.city,
-        "Endereço": add.streetAddress
       };
     });
   }
@@ -215,7 +206,7 @@ class _InfoPageState extends State<InfoPage> {
                                             TextDecorationStyle.wavy),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () => Navigator.pushNamed(
-                                          context, takeCarePage.path)),
+                                          context, takeCarePage.path!)),
                                 const TextSpan(text: ".")
                               ]))),
                     ],

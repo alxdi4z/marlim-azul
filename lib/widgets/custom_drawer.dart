@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/widgets/page_impl.dart';
 
-Widget customDrawer(String path, BuildContext context) {
+Widget customDrawer(BuildContext context, {String? path}) {
   List<PageImpl> pagesToShow =
       pagesList.where((page) => page.visible == true).toList();
   return Drawer(
@@ -31,7 +31,10 @@ Widget customDrawer(String path, BuildContext context) {
                   )
                 ] +
                 pagesToShow.map((page) {
-                  bool selectedPage = page.path == path;
+                  bool selectedPage = false;
+                  if (path != null) {
+                    selectedPage = page.path == path;
+                  }
                   return Padding(
                       padding: const EdgeInsets.all(5),
                       child: Container(
@@ -58,9 +61,9 @@ Widget customDrawer(String path, BuildContext context) {
                                 fontFamily: "Righteous"),
                           ),
                           onTap: () {
-                            if (!selectedPage) {
+                            if (!selectedPage && page.path != null) {
                               Navigator.of(context).pop();
-                              Navigator.pushNamed(context, page.path);
+                              Navigator.pushNamed(context, page.path!);
                             }
                           },
                         ),

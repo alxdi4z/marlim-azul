@@ -16,12 +16,7 @@ class SignInPage extends PageImpl {
   final Map<String, String>? queryParameters;
 
   const SignInPage({Key? key, this.queryParameters})
-      : super(
-            key: key,
-            highlight: highlight,
-            path: path,
-            visible: showInBar,
-            title: title);
+      : super(key: key, path: path, visible: showInBar, title: title);
 
   @override
   State<PageImpl> createState() => _SignInPageState();
@@ -38,8 +33,11 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      PageCustomView(view: view(context), path: widget.path);
+  Widget build(BuildContext context) => PageCustomView(
+        view: view(context),
+        path: widget.path,
+        backButton: false,
+      );
 
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;

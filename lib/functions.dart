@@ -6,10 +6,15 @@ import 'package:marlinazul_frontend/widgets/page_impl.dart';
 bool checkMobile(double width) => width <= 720;
 
 String getRoute(PageImpl page) {
+  String path = "/";
   try {
-    return pagesList.firstWhere((p) => p == page).path;
+    PageImpl pageToGo = pagesList.firstWhere((p) => p == page);
+    if (pageToGo.path != null) {
+      path = pageToGo.path!;
+    }
+    return path;
   } catch (e) {
-    return "/";
+    return path;
   }
 }
 

@@ -3,9 +3,9 @@ import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/widgets/page_impl.dart';
 
 class CustomTabBar extends StatelessWidget {
-  final String path;
+  final String? path;
 
-  const CustomTabBar({Key? key, required this.path}) : super(key: key);
+  const CustomTabBar({Key? key, this.path}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,12 @@ class CustomTabBar extends StatelessWidget {
         pagesList.where((page) => page.visible).toList();
     return Row(
         children: pagesToShow.map((page) {
-      bool selectedPage = page.path == path;
+      bool selectedPage = false;
+
+      if (path != null) {
+        selectedPage = page.path == path;
+      }
+
       return InkWell(
         borderRadius: BorderRadius.circular(15),
         hoverColor: primaryColor.withOpacity(0.1),
@@ -41,8 +46,8 @@ class CustomTabBar extends StatelessWidget {
           ),
         ),
         onTap: () {
-          if (!selectedPage) {
-            Navigator.pushNamed(context, page.path);
+          if (!selectedPage && page.path != null) {
+            Navigator.pushNamed(context, page.path!);
           }
         },
       );
