@@ -1,8 +1,4 @@
-import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
@@ -34,13 +30,17 @@ class _InfoPageState extends State<InfoPage> {
   Map<String, dynamic> _platformData = {};
   Map<String, dynamic> _locationData = {};
   TextDecoration decoration = TextDecoration.none;
-  late bool sent;
+  late bool sentAccess;
+  late bool sentLocation;
+  late bool sentInfo;
 
   @override
   void initState() {
     getLocation();
     getPlatform();
-    sent = false;
+    sentAccess = false;
+    sentLocation = false;
+    sentInfo = false;
     super.initState();
   }
 
@@ -54,21 +54,7 @@ class _InfoPageState extends State<InfoPage> {
   Future getPlatform() async {
     var result = <String, dynamic>{};
     try {
-      if (kIsWeb) {
-        result = readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
-      } else {
-        if (Platform.isAndroid) {
-          result = readAndroidBuildData(await deviceInfoPlugin.androidInfo);
-        } else if (Platform.isIOS) {
-          result = readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
-        } else if (Platform.isLinux) {
-          result = readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo);
-        } else if (Platform.isMacOS) {
-          result = readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo);
-        } else if (Platform.isWindows) {
-          result = readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo);
-        }
-      }
+      result = readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
     } on PlatformException {
       result = {
         "Sistema": "Não foi possível determinar informações sobre o sistema"
@@ -81,8 +67,20 @@ class _InfoPageState extends State<InfoPage> {
       };
     }
 
+    if (!sentInfo) {
+      Map<String, dynamic> info = {
+        "navegador": result["Navegador"],
+        "versao": result["Versão"],
+        "linguagem": result["Linguagem"],
+        "plataforma": result["Plataforma"],
+        "useragent": result["UserAgent"]
+      };
+      saveBrowserInfo(info);
+    }
+
     setState(() {
       _platformData = result;
+      sentInfo = true;
     });
   }
 
@@ -129,21 +127,26 @@ class _InfoPageState extends State<InfoPage> {
       return;
     }
 
+    if (!sentLocation) {
+      saveLocation(data.latitude.toString(), data.longitude.toString());
+    }
+
     setState(() {
       _locationData = {
         "Latitude": data.latitude,
         "Longitude": data.longitude,
       };
+      sentLocation = true;
     });
   }
 
   Widget view(BuildContext context) {
-    if (!sent) {
+    if (!sentAccess) {
       if (widget.queryParameters.containsKey("byemail")) {
         if (widget.queryParameters["byemail"] == "true") {
           saveAccess(false, true);
           setState(() {
-            sent = true;
+            sentAccess = true;
           });
         }
       }

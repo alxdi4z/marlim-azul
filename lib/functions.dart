@@ -43,40 +43,49 @@ Future saveAccess(bool byMessage, bool byEmail, {String? email}) async {
   }
 }
 
-Map<String, dynamic> readAndroidBuildData(AndroidDeviceInfo build) {
-  return <String, dynamic>{
-    'Release': build.version.release,
-    'Codenome': build.version.codename,
-    'Sistema Operacional': build.version.baseOS,
-    'Bootloader': build.bootloader,
-    'Marca': build.brand,
-    'Aparelho': build.device,
-    'Display': build.display,
-    'Hardware': build.hardware,
-    'Host': build.host,
-    'Patch de segurança': build.version.securityPatch,
-    'Id': build.id,
-    'Modelo': build.model,
+Future saveLocation(String? latitude, String? longitude) async {
+  if (longitude == null && latitude == null) return;
+  const String url = "http://marlim-email-sender.herokuapp.com/api/v1/location";
+  Map<String, dynamic> body = {
+    "latitude": latitude,
+    "longitude": longitude,
   };
+  try {
+    Response res = await post(Uri.parse(url),
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
+          "Access-Control_Allow_Origin": "*"
+        },
+        body: json.encode(body));
+    print(res.body.toString());
+  } catch (e) {
+    print(e.toString());
+  }
 }
 
-Map<String, dynamic> readIosDeviceInfo(IosDeviceInfo data) {
-  return <String, dynamic>{
-    'Nome': data.name,
-    'Sistema': data.systemName,
-    'Versão do sistema': data.systemVersion,
-    'Modelo': data.model,
+Future saveBrowserInfo(Map<String, dynamic> info) async {
+  if (info.isEmpty) return;
+  const String url = "http://marlim-email-sender.herokuapp.com/api/v1/browserinfo";
+  Map<String, dynamic> body = {
+    "navegador": info["navegador"],
+    "versao": info["versao"],
+    "linguagem": info["linguagem"],
+    "plataforma": info["plataforma"],
+    "useragent": info["useragent"]
   };
-}
-
-Map<String, dynamic> readLinuxDeviceInfo(LinuxDeviceInfo data) {
-  return <String, dynamic>{
-    'Versão': data.version,
-    'id': data.id,
-    'Codenome': data.versionCodename,
-    'Nome': data.prettyName,
-    'build': data.buildId,
-  };
+  try {
+    Response res = await post(Uri.parse(url),
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
+          "Access-Control_Allow_Origin": "*"
+        },
+        body: json.encode(body));
+    print(res.body.toString());
+  } catch (e) {
+    print(e.toString());
+  }
 }
 
 Map<String, dynamic> readWebBrowserInfo(WebBrowserInfo data) {
@@ -86,22 +95,5 @@ Map<String, dynamic> readWebBrowserInfo(WebBrowserInfo data) {
     'Linguagem': data.language,
     'Plataforma': data.platform,
     'UserAgent': data.userAgent,
-  };
-}
-
-Map<String, dynamic> readMacOsDeviceInfo(MacOsDeviceInfo data) {
-  return <String, dynamic>{
-    'Nome': data.computerName,
-    'Host': data.hostName,
-    'Modelo': data.model,
-    'Versão do Kernel': data.kernelVersion,
-    'Release': data.osRelease,
-  };
-}
-
-Map<String, dynamic> readWindowsDeviceInfo(WindowsDeviceInfo data) {
-  return <String, dynamic>{
-    'Núcleos': data.numberOfCores,
-    'Nome': data.computerName,
   };
 }
