@@ -26,7 +26,7 @@ class TextConstructor {
           ),
           const SizedBox(width: 5,),
           RichText(
-              textAlign: TextAlign.justify,
+              textAlign: TextAlign.start,
               text: TextSpan(
                   style: TextStyle(
                       color: color, fontSize: fontSize * 1.2, height: 1.5),
@@ -37,7 +37,7 @@ class TextConstructor {
   static Widget Paragraph(List<TextSpan> listText, Color color, EdgeInsetsGeometry padding) => Padding(
       padding: padding,
       child: RichText(
-          textAlign: TextAlign.justify,
+          textAlign: TextAlign.start,
           text: TextSpan(
               style: TextStyle(color: color, fontSize: fontSize, height: 1.5),
               children: listText)));
