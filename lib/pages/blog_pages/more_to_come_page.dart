@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
 import 'package:marlinazul_frontend/widgets/page_impl.dart';
 
 class MoreToComePage extends PageImpl {
@@ -8,7 +9,7 @@ class MoreToComePage extends PageImpl {
             title: "Há mais por vir...",
             visible: false,
             assetPath: "images/horizon.jpg",
-            subtitle: "Novos módulos serão adicionados com o tempo");
+            subtitle: "Novos módulos serão adicionados em breve");
 
   @override
   _MoreToComePageState createState() => _MoreToComePageState();
@@ -16,7 +17,10 @@ class MoreToComePage extends PageImpl {
 
 class _MoreToComePageState extends State<MoreToComePage> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) =>
+      PageCustomView(view: view(context), backButton: true);
+
+  Widget view(BuildContext context) {
     return Container();
   }
 }

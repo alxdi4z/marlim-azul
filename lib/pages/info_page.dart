@@ -33,6 +33,7 @@ class _InfoPageState extends State<InfoPage> {
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _platformData = {};
   Map<String, dynamic> _locationData = {};
+  TextDecoration decoration = TextDecoration.none;
 
   @override
   void initState() {
@@ -187,28 +188,47 @@ class _InfoPageState extends State<InfoPage> {
                               ]))),
                       Padding(
                           padding: const EdgeInsets.only(bottom: 15),
-                          child: RichText(
-                              text: TextSpan(
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "Righteous",
-                                      fontSize: fontSize),
-                                  children: [
-                                const TextSpan(
-                                    text:
-                                        "Para saber mais dê uma olhadinha em "),
-                                TextSpan(
-                                    text: takeCarePage.title,
-                                    style: const TextStyle(
-                                        color: primaryColor,
-                                        decoration: TextDecoration.underline,
-                                        decorationStyle:
-                                            TextDecorationStyle.wavy),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () => Navigator.pushNamed(
-                                          context, takeCarePage.path!)),
-                                const TextSpan(text: ".")
-                              ]))),
+                          child: Row(
+                            children: [
+                              RichText(
+                                  text: const TextSpan(
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Righteous",
+                                          fontSize: fontSize),
+                                      children: [
+                                    TextSpan(
+                                        text:
+                                            "Para saber mais dê uma olhadinha em "),
+                                  ])),
+                              InkWell(
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                splashColor: Colors.transparent,
+                                child: Text(
+                                  takeCarePage.title,
+                                  style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: fontSize,
+                                  decoration: decoration),
+                                ),
+                                onHover: (isHovering) {
+                                  setState(() {
+                                    decoration = isHovering
+                                        ? TextDecoration.underline
+                                        : TextDecoration.none;
+                                  });
+                                },
+                                onTap: () => Navigator.pushNamed(
+                                    context, takeCarePage.path!),
+                              ),
+                              const Text(
+                                ".",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: fontSize),
+                              )
+                            ],
+                          )),
                     ],
                   ),
                 ),

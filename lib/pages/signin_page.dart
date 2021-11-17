@@ -93,9 +93,11 @@ class _SignInPageState extends State<SignInPage> {
                                             "por isso queremos que você esteja sempre "
                                             "atualizado sobre como se prevenir às novas formas de ataque "
                                             "que surgem por aí.\n"),
+                                    TextSpan(text: "Se inscreva "),
                                     TextSpan(
-                                        text:
-                                            "Se inscreva agora mesmo na nossa "),
+                                        text: "agora mesmo ",
+                                        style: TextStyle(color: primaryColor)),
+                                    TextSpan(text: "na nossa "),
                                     TextSpan(
                                         text: "newsletter ",
                                         style: TextStyle(color: primaryColor)),
