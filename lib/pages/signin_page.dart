@@ -29,6 +29,13 @@ class SignInPage extends PageImpl {
 class _SignInPageState extends State<SignInPage> {
   final textController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  late bool sent;
+
+  @override
+  void initState() {
+    sent = false;
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -44,11 +51,17 @@ class _SignInPageState extends State<SignInPage> {
       );
 
   Widget view(BuildContext context) {
-    if (widget.queryParameters.containsKey("message")) {
-      if (widget.queryParameters["message"] == "true") {
-        saveAccess(true, false);
+    if (!sent) {
+      if (widget.queryParameters.containsKey("message")) {
+        if (widget.queryParameters["message"] == "true") {
+          saveAccess(true, false);
+          setState(() {
+            sent = true;
+          });
+        }
       }
     }
+
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
     double height = size.height - (mobile ? mobileBarHeight : desktopBarHeight);

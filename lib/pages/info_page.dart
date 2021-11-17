@@ -34,16 +34,13 @@ class _InfoPageState extends State<InfoPage> {
   Map<String, dynamic> _platformData = {};
   Map<String, dynamic> _locationData = {};
   TextDecoration decoration = TextDecoration.none;
+  late bool sent;
 
   @override
   void initState() {
     getLocation();
     getPlatform();
-    if (widget.queryParameters.containsKey("byemail")) {
-      if (widget.queryParameters["byemail"] == "true") {
-        saveAccess(false, true);
-      }
-    }
+    sent = false;
     super.initState();
   }
 
@@ -141,7 +138,16 @@ class _InfoPageState extends State<InfoPage> {
   }
 
   Widget view(BuildContext context) {
-
+    if (!sent) {
+      if (widget.queryParameters.containsKey("byemail")) {
+        if (widget.queryParameters["byemail"] == "true") {
+          saveAccess(false, true);
+          setState(() {
+            sent = true;
+          });
+        }
+      }
+    }
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
     PageImpl takeCarePage = const TakeCarePage();
@@ -216,7 +222,7 @@ class _InfoPageState extends State<InfoPage> {
                                   style: TextStyle(
                                       color: primaryColor,
                                       fontSize: fontSize,
-                                  decoration: decoration),
+                                      decoration: decoration),
                                 ),
                                 onHover: (isHovering) {
                                   setState(() {
