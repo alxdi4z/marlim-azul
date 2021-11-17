@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/functions.dart';
 import 'package:marlinazul_frontend/pages/home_page.dart';
 import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
@@ -79,15 +78,8 @@ class _NotFoundPageState extends State<NotFoundPage> {
                   highlightColor: primaryColor.withOpacity(0.6),
                   onTap: () =>
                       Navigator.pushNamed(context, getRoute(const HomePage())),
-                  child: SvgPicture.asset("images/door.svg",
-                      placeholderBuilder: (context) => SizedBox(
-                            child: CircularProgressIndicator(
-                              color: Colors.white.withOpacity(0.3),
-                            ),
-                            height: size.height * .14,
-                            width: size.height * .14,
-                          ),
-                      height: size.height * .25),
+                  child:
+                      Image.asset("images/door.png", height: size.height * .25),
                 ),
               ),
               const Padding(

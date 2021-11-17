@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
 import 'package:marlinazul_frontend/pages/take_care.dart';
@@ -145,14 +144,7 @@ class _PageCustomViewState extends State<PageCustomView> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: SvgPicture.asset("images/marlin_logo.svg",
-                          placeholderBuilder: (context) => SizedBox(
-                                child: CircularProgressIndicator(
-                                  color: Colors.white.withOpacity(0.3),
-                                ),
-                                height: desktopBarHeight * .6,
-                                width: desktopBarHeight * .6,
-                              ),
+                      child: Image.asset("images/marlin_logo.png",
                           height: desktopBarHeight * .6),
                     ),
                     logo(fontScaling * 1.2),
@@ -196,14 +188,7 @@ class _PageCustomViewState extends State<PageCustomView> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(right: 5),
-                          child: SvgPicture.asset("images/marlin_logo.svg",
-                              placeholderBuilder: (context) => SizedBox(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.white.withOpacity(0.3),
-                                    ),
-                                    height: 19,
-                                    width: 19,
-                                  ),
+                          child: Image.asset("images/marlin_logo.png",
                               height: desktopBarHeight * .6),
                         ),
                         logo(19),

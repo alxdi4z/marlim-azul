@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
@@ -197,16 +196,7 @@ class _SignInPageState extends State<SignInPage> {
                     Padding(
                       padding:
                           EdgeInsets.only(top: mobile ? 35 : 10, bottom: 10),
-                      child: SvgPicture.asset("images/gift.svg",
-                          placeholderBuilder: (context) => SizedBox(
-                                child: CircularProgressIndicator(
-                                  color: Colors.white.withOpacity(0.3),
-                                ),
-                                height:
-                                    mobile ? size.width * .4 : size.width * .2,
-                                width:
-                                    mobile ? size.width * .4 : size.width * .2,
-                              ),
+                      child: Image.asset("images/gift.png",
                           width: mobile ? size.width * .7 : size.width * .3),
                     ),
                   ],

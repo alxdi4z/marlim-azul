@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
 import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
@@ -70,14 +69,7 @@ class _HomePageState extends State<HomePage> {
       ),
       Padding(
         padding: EdgeInsets.only(top: mobile ? 35 : 10, bottom: 10),
-        child: SvgPicture.asset("images/cyber-attack.svg",
-            placeholderBuilder: (context) => SizedBox(
-                  child: CircularProgressIndicator(
-                    color: Colors.white.withOpacity(0.3),
-                  ),
-                  height: mobile ? size.width * .4 : size.width * .2,
-                  width: mobile ? size.width * .4 : size.width * .2,
-                ),
+        child: Image.asset("images/cyber-attack.png",
             width: mobile ? size.width * .7 : size.width * .3),
       ),
     ];
@@ -85,14 +77,7 @@ class _HomePageState extends State<HomePage> {
     List<Widget> bloco2 = [
       Padding(
         padding: EdgeInsets.only(top: mobile ? 35 : 10, bottom: 10),
-        child: SvgPicture.asset("images/crimes.svg",
-            placeholderBuilder: (context) => SizedBox(
-                  child: CircularProgressIndicator(
-                    color: Colors.white.withOpacity(0.3),
-                  ),
-                  height: mobile ? size.width * .4 : size.width * .2,
-                  width: mobile ? size.width * .4 : size.width * .2,
-                ),
+        child: Image.asset("images/crimes.png",
             width: mobile ? size.width * .7 : size.width * .3),
       ),
       SizedBox(
@@ -133,14 +118,7 @@ class _HomePageState extends State<HomePage> {
     List<Widget> bloco3 = [
       Padding(
         padding: EdgeInsets.only(bottom: mobile ? 35 : 10, top: 10),
-        child: SvgPicture.asset("images/marlin_logo.svg",
-            placeholderBuilder: (context) => SizedBox(
-                  child: CircularProgressIndicator(
-                    color: Colors.white.withOpacity(0.3),
-                  ),
-                  height: mobile ? size.width * .4 : size.width * .2,
-                  width: mobile ? size.width * .4 : size.width * .2,
-                ),
+        child: Image.asset("images/marlin_logo.png",
             width: mobile ? size.width * .7 : size.width * .3),
       ),
       SizedBox(

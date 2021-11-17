@@ -36,7 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   location: ^4.3.0
   device_info_plus: ^3.1.0
-  flutter_svg: ^0.23.0+1
   email_validator: ^2.0.1
   http: ^0.13.4
 

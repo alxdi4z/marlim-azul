@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
 import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
@@ -82,34 +81,18 @@ class _AboutPageState extends State<AboutPage> {
                     constraints: BoxConstraints(
                         maxWidth: size.width * .4,
                         maxHeight: size.height * .15),
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: SvgPicture.asset(
-                        "images/dart_icon.svg",
-                        height: size.height,
-                        placeholderBuilder: (context) => SizedBox(
-                          child: CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.3),
-                          ),
-                        ),
-                      ),
+                    child: Image.asset(
+                      "images/dart_icon.png",
+                      height: size.height,
                     ),
                   ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
                         maxWidth: size.width * .4,
                         maxHeight: size.height * .15),
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: SvgPicture.asset(
-                        "images/flutter_icon.svg",
-                        height: size.height,
-                        placeholderBuilder: (context) => SizedBox(
-                          child: CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.3),
-                          ),
-                        ),
-                      ),
+                    child: Image.asset(
+                      "images/flutter_icon.png",
+                      height: size.height,
                     ),
                   ),
                 ],
