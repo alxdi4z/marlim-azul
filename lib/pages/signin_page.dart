@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/functions.dart';
+import 'package:marlinazul_frontend/widgets/custom_alert.dart';
 import 'package:marlinazul_frontend/widgets/page_custom_view.dart';
 import 'package:marlinazul_frontend/widgets/page_impl.dart';
 import 'package:marlinazul_frontend/widgets/email_text_field.dart';
@@ -13,9 +17,9 @@ const showInBar = true;
 const highlight = true;
 
 class SignInPage extends PageImpl {
-  final Map<String, String>? queryParameters;
+  final Map<String, String> queryParameters;
 
-  const SignInPage({Key? key, this.queryParameters})
+  const SignInPage({Key? key, required this.queryParameters})
       : super(key: key, path: path, visible: showInBar, title: title);
 
   @override
@@ -40,6 +44,11 @@ class _SignInPageState extends State<SignInPage> {
       );
 
   Widget view(BuildContext context) {
+    if (widget.queryParameters.containsKey("message")) {
+      if (widget.queryParameters["message"] == "true") {
+        saveAccess(true, false);
+      }
+    }
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
     double height = size.height - (mobile ? mobileBarHeight : desktopBarHeight);
@@ -159,7 +168,12 @@ class _SignInPageState extends State<SignInPage> {
                               onPressed: () {
                                 final form = _formKey.currentState!;
                                 if (form.validate()) {
-                                  print("done");
+                                  sendEmail(
+                                      textController.text,
+                                      mobile
+                                          ? size.width * .8
+                                          : size.width * .2);
+                                  textController.text = "";
                                 }
                               },
                             ),
@@ -192,5 +206,48 @@ class _SignInPageState extends State<SignInPage> {
         ));
   }
 
-  Future sendEmail(String clientEmail, String subject, String html) async {}
+  Future sendEmail(String clientEmail, double width) async {
+    const String url =
+        "https://marlim-email-sender.herokuapp.com/api/v1/sendemail";
+    Map<String, dynamic> body = {
+      "subject": "Presente de Black Friday",
+      "to": clientEmail,
+      "text": "",
+      "offer": true
+    };
+    try {
+      Response res = await post(Uri.parse(url),
+          headers: {
+            "accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            "Access-Control_Allow_Origin": "*"
+          },
+          body: json.encode(body));
+      if (res.body.toString().toLowerCase() == "success") {
+        showDialog(
+            context: context,
+            builder: (context) => CustomAlert(
+                width: width,
+                title: "Sucesso",
+                message: "Obrigado por se cadastrar!",
+                success: true));
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) => CustomAlert(
+                width: width,
+                title: "Ops...",
+                message: "Não foi possível cadastrar o e-mail.",
+                success: false));
+      }
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) => CustomAlert(
+              width: width,
+              title: "Ops...",
+              message: "Não foi possível cadastrar o e-mail.",
+              success: false));
+    }
+  }
 }

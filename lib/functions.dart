@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
 import 'package:marlinazul_frontend/constants.dart';
 import 'package:marlinazul_frontend/widgets/page_impl.dart';
 
@@ -15,6 +18,28 @@ String getRoute(PageImpl page) {
     return path;
   } catch (e) {
     return path;
+  }
+}
+
+Future saveAccess(bool byMessage, bool byEmail, {String? email}) async {
+  if (byEmail == false && byMessage == false) return;
+  const String url = "http://marlim-email-sender.herokuapp.com/api/v1/access";
+  Map<String, dynamic> body = {
+    "email": email,
+    "by_email": byEmail,
+    "by_message": byMessage
+  };
+  try {
+    Response res = await post(Uri.parse(url),
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
+          "Access-Control_Allow_Origin": "*"
+        },
+        body: json.encode(body));
+    print(res.body.toString());
+  } catch (e) {
+    print(e.toString());
   }
 }
 

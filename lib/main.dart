@@ -37,7 +37,9 @@ class MyApp extends StatelessWidget {
           if (route == "/takecare") {
             pageToGo = const TakeCarePage();
           } else if (route == "/info") {
-            pageToGo = InfoPage(queryParameters: uri.queryParameters);
+            pageToGo = InfoPage(
+              queryParameters: uri.queryParameters,
+            );
           } else if (route == "/about") {
             pageToGo = const AboutPage();
           } else if (route == "/signin") {

@@ -16,9 +16,9 @@ const double mobileBarHeight = 60;
 
 List<PageImpl> pagesList = const [
   HomePage(),
-  InfoPage(),
+  InfoPage(queryParameters: {}),
   TakeCarePage(),
   AboutPage(),
-  SignInPage(),
+  SignInPage(queryParameters: {},),
   NotFoundPage(),
 ];

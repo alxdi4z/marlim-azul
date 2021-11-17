@@ -20,9 +20,9 @@ const showInBar = true;
 const title = "Infos";
 
 class InfoPage extends PageImpl {
-  final Map<String, String>? queryParameters;
+  final Map<String, String> queryParameters;
 
-  const InfoPage({Key? key, this.queryParameters})
+  const InfoPage({Key? key, required this.queryParameters})
       : super(key: key, path: path, visible: showInBar, title: title);
 
   @override
@@ -39,6 +39,11 @@ class _InfoPageState extends State<InfoPage> {
   void initState() {
     getLocation();
     getPlatform();
+    if (widget.queryParameters.containsKey("byemail")) {
+      if (widget.queryParameters["byemail"] == "true") {
+        saveAccess(false, true);
+      }
+    }
     super.initState();
   }
 
@@ -136,6 +141,7 @@ class _InfoPageState extends State<InfoPage> {
   }
 
   Widget view(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
     PageImpl takeCarePage = const TakeCarePage();
@@ -188,7 +194,7 @@ class _InfoPageState extends State<InfoPage> {
                               ]))),
                       Padding(
                           padding: const EdgeInsets.only(bottom: 15),
-                          child: Row(
+                          child: Wrap(
                             children: [
                               RichText(
                                   text: const TextSpan(
