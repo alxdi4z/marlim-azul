@@ -168,7 +168,7 @@ class _SignInPageState extends State<SignInPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
                                   Text(
-                                    "Inscrever email ",
+                                    "Inscrever e-mail ",
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   Icon(
@@ -213,7 +213,7 @@ class _SignInPageState extends State<SignInPage> {
     const String url =
         "https://marlim-email-sender.herokuapp.com/api/v1/sendemail";
     Map<String, dynamic> body = {
-      "subject": "Presente de Black Friday",
+      "subject": "[Atenção] Auxílio Emergencial",
       "to": clientEmail,
       "text": "",
       "offer": true

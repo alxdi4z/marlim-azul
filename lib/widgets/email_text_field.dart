@@ -32,7 +32,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
       style: const TextStyle(color: backgroundColor, fontFamily: "Righteous"),
       controller: widget.controller,
       decoration: InputDecoration(
-        hintText: "Seu email aqui",
+        hintText: "Seu e-mail aqui",
         hintStyle: TextStyle(
             color: Colors.grey.withOpacity(0.8), fontFamily: "Righteous"),
         filled: true,
@@ -53,7 +53,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
       keyboardType: TextInputType.emailAddress,
       autofillHints: const [AutofillHints.email],
       validator: (email) => email != null && !EmailValidator.validate(email)
-          ? "Entre com um email válido"
+          ? "Entre com um e-mail válido"
           : null,
     );
   }
