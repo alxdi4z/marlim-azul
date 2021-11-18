@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     PageImpl homePage = pagesList.firstWhere((page) => page.path == "/");
     return MaterialApp(
-      title: 'O Marlin Azul',
+      title: 'O Marlim Azul',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "Righteous"),
       onGenerateRoute: (settings) {
