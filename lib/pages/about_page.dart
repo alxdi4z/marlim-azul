@@ -30,78 +30,81 @@ class _AboutPageState extends State<AboutPage> {
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
-    double width = mobile ? size.width : size.width * .7;
+    double padding = mobile ? size.width * .05 : size.width * .07;
 
     return SingleChildScrollView(
       controller: ScrollController(),
-      child: Column(
-        children: [
-          RowBox(widgets: [
-            SizedBox(
-              width: mobile ? width * .9 : width * .5,
-              child: const Text(
-                "Esse projeto foi criado como trabalho de conclusão de curso "
-                "para a instituição universitária Libertas Faculdades Integradas, "
-                "no curso de Sistemas de Informação.",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: fontSize,
-                    fontFamily: "Righteous"),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(padding, 15, padding, 30),
+        child: Column(
+          children: [
+            RowBox(widgets: [
+              SizedBox(
+                width: mobile ? size.width * .9 : size.width * .35,
+                child: const Text(
+                  "Esse projeto foi criado como trabalho de conclusão de curso "
+                      "para a instituição universitária Libertas Faculdades Integradas, "
+                      "no curso de Sistemas de Informação.",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: fontSize,
+                      fontFamily: "Righteous"),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxHeight: mobile ? size.height * .3 : size.height * .2,
+                        maxWidth: size.width * .3),
+                    child: Image.asset(
+                      "images/libertas_logo.png",
+                      color: primaryColor,
+                      height: size.height,
+                    )),
+              ),
+            ], width: size.width),
+            const Padding(
+                padding: EdgeInsets.only(top: 30, bottom: 20),
+                child: Text(
+                  "Tecnologias utilizadas:",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: fontSize,
+                      fontFamily: "Righteous"),
+                  textAlign: TextAlign.center,
+                )),
             Padding(
-              padding: const EdgeInsets.all(20),
-              child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxHeight: mobile ? size.height * .3 : size.height * .2,
-                      maxWidth: width * .4),
-                  child: Image.asset(
-                    "images/libertas_logo.png",
-                    color: primaryColor,
-                    height: size.height,
-                  )),
+                padding: const EdgeInsets.only(bottom: fontSize * 1.2),
+                child: Wrap(
+                  spacing: 20,
+                  children: [
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxWidth: size.width * .4,
+                          maxHeight: size.height * .15),
+                      child: Image.asset(
+                        "images/dart_icon.png",
+                        height: size.height,
+                      ),
+                    ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxWidth: size.width * .4,
+                          maxHeight: size.height * .15),
+                      child: Image.asset(
+                        "images/flutter_icon.png",
+                        height: size.height,
+                      ),
+                    ),
+                  ],
+                )),
+            Padding(
+              padding: const EdgeInsets.only(top: 90, bottom: 30),
+              child: logo(fontSize * 1.5),
             ),
-          ], width: width),
-          const Padding(
-              padding: EdgeInsets.only(top: 30, bottom: 20),
-              child: Text(
-                "Tecnologias utilizadas:",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: fontSize,
-                    fontFamily: "Righteous"),
-                textAlign: TextAlign.center,
-              )),
-          Padding(
-              padding: const EdgeInsets.only(bottom: fontSize * 1.2),
-              child: Wrap(
-                spacing: 20,
-                children: [
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                        maxWidth: size.width * .4,
-                        maxHeight: size.height * .15),
-                    child: Image.asset(
-                      "images/dart_icon.png",
-                      height: size.height,
-                    ),
-                  ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                        maxWidth: size.width * .4,
-                        maxHeight: size.height * .15),
-                    child: Image.asset(
-                      "images/flutter_icon.png",
-                      height: size.height,
-                    ),
-                  ),
-                ],
-              )),
-          Padding(
-            padding: const EdgeInsets.only(top: 90, bottom: 30),
-            child: logo(fontSize * 1.5),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

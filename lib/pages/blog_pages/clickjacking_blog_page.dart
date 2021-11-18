@@ -26,11 +26,11 @@ class _ClickjackingBlogPageState extends State<ClickjackingBlogPage> {
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
-    return Container(
-      padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-      width: mobile ? size.width * .9 : size.width * .7,
-      child: SingleChildScrollView(
-        controller: ScrollController(),
+    double padding = mobile ? size.width * .05 : size.width * .15;
+    return SingleChildScrollView(
+      controller: ScrollController(),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(padding, 15, padding, 70),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,7 +70,7 @@ class _ClickjackingBlogPageState extends State<ClickjackingBlogPage> {
               TextSpan(
                   text: "Lembre-se sempre de passar o mouse sobre o botão ou "
                       "link antes de clicar em algo e verificar se a URL é a esperada.")
-            ], Colors.white, const EdgeInsets.only(bottom: 100))
+            ], Colors.white, const EdgeInsets.only(bottom: 10))
           ],
         ),
       ),

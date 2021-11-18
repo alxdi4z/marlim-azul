@@ -21,7 +21,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'O Marlim Azul',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "Righteous"),
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "Righteous",scrollbarTheme: ScrollbarThemeData(
+        isAlwaysShown: true,
+        thickness: MaterialStateProperty.all(10),
+        thumbColor: MaterialStateProperty.all(Colors.white.withOpacity(0.2)),
+        radius: const Radius.circular(10),
+        minThumbLength: 30
+      )),
       onGenerateRoute: (settings) {
         var uri = Uri.parse(settings.name ?? "/");
         if (uri.toString() == "/") {

@@ -72,7 +72,7 @@ class _PageCustomViewState extends State<PageCustomView> {
           ? FloatingActionButtonLocation.miniEndFloat
           : FloatingActionButtonLocation.miniStartTop,
       backgroundColor: backgroundColor,
-      endDrawer: mobile ? customDrawer(context, path: widget.path) : null,
+      endDrawer: customDrawer(context, path: widget.path),
       key: scaffoldKey,
       body: LayoutBuilder(
         builder: (context, constraints) {

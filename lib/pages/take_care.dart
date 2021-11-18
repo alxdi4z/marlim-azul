@@ -39,52 +39,56 @@ class _TakeCarePageState extends State<TakeCarePage> {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
     double cardWidth = mobile ? size.width * .9 : size.width * .4;
+    double padding = mobile ? size.width * .03 : size.width * .05;
     return Container(
       height: size.height - (mobile ? mobileBarHeight : desktopBarHeight),
       alignment: Alignment.topCenter,
       width: size.width,
       child: SingleChildScrollView(
         controller: ScrollController(),
-        child: Column(
-          children: [
-            Wrap(
-              direction: Axis.horizontal,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: CustomCard(
-                    page: const PhishingBlogPage(),
-                    width: cardWidth,
-                    clickable: true,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(padding, 10, padding, 30),
+          child: Column(
+            children: [
+              Wrap(
+                direction: Axis.horizontal,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CustomCard(
+                      page: const PhishingBlogPage(),
+                      width: cardWidth,
+                      clickable: true,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: CustomCard(
-                    page: const ClickjackingBlogPage(),
-                    width: cardWidth,
-                    clickable: true,
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CustomCard(
+                      page: const ClickjackingBlogPage(),
+                      width: cardWidth,
+                      clickable: true,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: CustomCard(
-                    page: const SpoofingBlogPage(),
-                    width: cardWidth,
-                    clickable: true,
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CustomCard(
+                      page: const SpoofingBlogPage(),
+                      width: cardWidth,
+                      clickable: true,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: CustomCard(
-                    page: const MoreToComePage(),
-                    width: cardWidth,
-                    clickable: false,
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CustomCard(
+                      page: const MoreToComePage(),
+                      width: cardWidth,
+                      clickable: false,
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
