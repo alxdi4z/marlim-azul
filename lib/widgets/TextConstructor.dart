@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marlinazul_frontend/constants.dart';
 
 class TextConstructor {
-  static Widget MainTitle(String text, Color color, EdgeInsetsGeometry padding) => Padding(
+  static Widget MainTitle(String text, Color color, EdgeInsetsGeometry padding) => Container(
         padding: padding,
         child: Center(
           child: Text(
@@ -15,10 +15,13 @@ class TextConstructor {
         ),
       );
 
-  static Widget Subtitle(List<TextSpan> listText, Color color, EdgeInsetsGeometry padding) => Padding(
+  static Widget Subtitle(List<TextSpan> listText, Color color, EdgeInsetsGeometry padding) => Container(
       padding: padding,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      alignment: Alignment.topLeft,
+      child: Wrap(
+        direction: Axis.horizontal,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.start,
         children: [
           CircleAvatar(
             radius: 3.5,
@@ -34,7 +37,7 @@ class TextConstructor {
         ],
       ));
 
-  static Widget Paragraph(List<TextSpan> listText, Color color, EdgeInsetsGeometry padding) => Padding(
+  static Widget Paragraph(List<TextSpan> listText, Color color, EdgeInsetsGeometry padding) => Container(
       padding: padding,
       child: RichText(
           textAlign: TextAlign.start,

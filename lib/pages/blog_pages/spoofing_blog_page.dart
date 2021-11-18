@@ -52,9 +52,9 @@ class _SpoofingBlogPageState extends State<SpoofingBlogPage> {
                       "ligação de um desconhecido dizendo que um parente próximo "
                       "foi sequestrado, pedindo que seja pago o resgate. Muitas "
                       "pessoas ao ter a idéia de um parente em um estado como esse "
-                      "acabam caindo no golpe e paganto a quantia pedida pelo atacante.\n"
+                      "acabam caindo no golpe e pagando a quantia pedida pelo atacante.\n"
                       "Geralmente esse tipo de ataque é mais direcionado aos idosos, "
-                      "por conta da ídeia de que eles não tem tanto conhecimento de "
+                      "por conta da idéia de que eles não tem tanto conhecimento de "
                       "tecnologia.")
             ], Colors.white, const EdgeInsets.only(bottom: 12)),
             TextConstructor.Paragraph(const [
@@ -71,7 +71,7 @@ class _SpoofingBlogPageState extends State<SpoofingBlogPage> {
             TextConstructor.Paragraph(const [
               TextSpan(
                   text:
-                      "O spoofing em websites ocorre quanto um atacante faz com que um site "
+                      "O spoofing em websites ocorre quando um atacante faz com que um site "
                       "malicioso pareça seguro, usando fontes, logos, e cores legítimas. "
                       "Assim tentando replicar um site confiável com a intenção de levar "
                       "os usuários a um site de phishing, por exemplo. Esse tipo de site "
@@ -87,10 +87,10 @@ class _SpoofingBlogPageState extends State<SpoofingBlogPage> {
                   text:
                       "O spoofing de e-mail ocorre quando um atacante envia e-mails "
                       "com endereços de remetentes falsos, com a intenção de pedir "
-                      "dinheiro, roubar informações, ou até infectar a maquina com "
+                      "dinheiro, roubar informações, ou até infectar a máquina com "
                       "algum tipo de malware. Esses remetentes falsos são criados "
                       "para parecer com alguém conhecido da vítima, sendo um colega "
-                      "ou até alguém da empresa da vítima. Esses endereços de e-mails "
+                      "ou até alguém da empresa. Esses endereços de e-mails "
                       "geralmente contém pequenas diferenças quando comparados com o "
                       "original, como por exemplo, letras alternadas, números, ou "
                       "caracteres especiais.")
