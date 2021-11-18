@@ -78,7 +78,7 @@ class _PhishingBlogPageState extends State<PhishingBlogPage> {
               TextSpan(
                   text:
                       "Pode não ser fora do comum receber um e-mail de um remetente desconhecido, "
-                      "mesmo se o remetente não fazer parte da sua organização, "
+                      "mesmo se o remetente não fizer parte da sua organização, "
                       "mas isso pode ser um sinal de phishing. "
                       "Sempre tire um tempo para analizar mensagens "
                       "de remetentes desconhecidos antes de interagir com o conteúdo.")
@@ -90,7 +90,7 @@ class _PhishingBlogPageState extends State<PhishingBlogPage> {
                   text:
                       "Empresas ou organizações geralmente tem funcionários responsáveis "
                       "por verificar os conteúdos que serão compartilhados para entregar "
-                      "algo de alta qualidade. Se acaso a mensagem ou e-mail vier com erros "
+                      "algo de alta qualidade. Se caso a mensagem ou e-mail vier com erros "
                       "ortográficos ou gramaticais óbvios, pode se tratar de uma tentativa "
                       "de phishing. Geralmente esses erros ocorrem por traduções inadequadas "
                       "de um idioma estrangeiro ou tentativas de escapar de algum filtro "
