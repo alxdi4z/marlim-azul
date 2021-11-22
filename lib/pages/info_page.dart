@@ -33,6 +33,8 @@ class _InfoPageState extends State<InfoPage> {
   late bool sentAccess;
   late bool sentLocation;
   late bool sentInfo;
+  bool phishing = false;
+  PageImpl takeCarePage = const TakeCarePage();
 
   @override
   void initState() {
@@ -147,17 +149,21 @@ class _InfoPageState extends State<InfoPage> {
           saveAccess(false, true);
           setState(() {
             sentAccess = true;
+            phishing = true;
           });
         }
       }
     }
+
+    return phishing ? phishingView(context) : normalView(context);
+  }
+
+  Widget normalView(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
-    PageImpl takeCarePage = const TakeCarePage();
-
     return Container(
       alignment: Alignment.center,
-      height: size.height,
+      height: size.height - (mobile ? mobileBarHeight : desktopBarHeight),
       width: size.width,
       child: SingleChildScrollView(
         controller: ScrollController(),
@@ -316,6 +322,107 @@ class _InfoPageState extends State<InfoPage> {
               background: false,
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget phishingView(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    bool mobile = checkMobile(size.width);
+    double padding = mobile ? size.width * .07 : size.width * .23;
+    return Container(
+      height: size.height - (mobile ? mobileBarHeight : desktopBarHeight),
+      width: size.width,
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: phishing ? Colors.red : Colors.transparent, width: 3)),
+      child: SingleChildScrollView(
+        controller: ScrollController(),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(padding, 15, padding, 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Center(
+                  child: Image.asset(
+                    "images/sign.png",
+                    width: mobile ? size.width * .3 : size.width * .15,
+                  ),
+                ),
+              ),
+              const Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: Center(
+                    child: Text(
+                      "Você foi fisgado!",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontFamily: "Righteous",
+                          fontSize: fontSize * 1.6,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )),
+              RichText(
+                  text: const TextSpan(
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Righteous",
+                          fontSize: fontSize),
+                      children: [
+                    TextSpan(
+                        text:
+                            "    O e-mail que redirecionou você para esta página foi usado para simular um ataque de phishing. "
+                            "Nenhum dado sensível está sendo coletado, mas se você veio parar aqui pode ser um "
+                            "sinal de que está suscetível a ser pego por ataques reais de criminosos reais!\n"
+                            "Você não quer entrar para o grupo das pessoas que tiveram seus dados comprometidos."),
+                  ])),
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.start,
+                alignment: WrapAlignment.start,
+                children: [
+                  RichText(
+                      text: const TextSpan(
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Righteous",
+                              fontSize: fontSize),
+                          children: [
+                        TextSpan(
+                            text:
+                                "Para saber como se proteger de ataques como esse dê uma olhada na nossa página "),
+                      ])),
+                  InkWell(
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    child: Text(
+                      takeCarePage.title,
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontSize: fontSize,
+                          decoration: decoration),
+                    ),
+                    onHover: (isHovering) {
+                      setState(() {
+                        decoration = isHovering
+                            ? TextDecoration.underline
+                            : TextDecoration.none;
+                      });
+                    },
+                    onTap: () =>
+                        Navigator.pushNamed(context, takeCarePage.path!),
+                  ),
+                  const Text(
+                    ".",
+                    style: TextStyle(color: Colors.white, fontSize: fontSize),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
