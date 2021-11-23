@@ -32,6 +32,7 @@ class _SpoofingBlogPageState extends State<SpoofingBlogPage> {
         child: Padding(
           padding: EdgeInsets.fromLTRB(padding, 15, padding, 70),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextConstructor.MainTitle(
                   widget.title, primaryColor, const EdgeInsets.only(bottom: 15)),

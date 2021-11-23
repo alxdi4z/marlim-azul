@@ -30,80 +30,84 @@ class _AboutPageState extends State<AboutPage> {
   Widget view(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     bool mobile = checkMobile(size.width);
-    double padding = mobile ? size.width * .05 : size.width * .07;
+    double padding = mobile ? size.width * .05 : size.width * .12;
 
-    return SingleChildScrollView(
-      controller: ScrollController(),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(padding, 15, padding, 30),
-        child: Column(
-          children: [
-            RowBox(widgets: [
-              SizedBox(
-                width: mobile ? size.width * .9 : size.width * .35,
-                child: const Text(
-                  "Esse projeto foi criado como trabalho de conclusão de curso "
-                      "para a instituição universitária Libertas Faculdades Integradas, "
-                      "no curso de Sistemas de Informação.",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: fontSize,
-                      fontFamily: "Righteous"),
+    return Container(
+      width: size.width,
+      height: size.height - (mobile ? mobileBarHeight : desktopBarHeight),
+      child: SingleChildScrollView(
+        controller: ScrollController(),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(padding, 15, padding, 30),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white.withOpacity(0.04),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                        maxHeight: mobile ? size.height * .3 : size.height * .2,
-                        maxWidth: size.width * .3),
-                    child: Image.asset(
-                      "images/libertas_logo.png",
-                      color: primaryColor,
-                      height: size.height,
-                    )),
-              ),
-            ], width: size.width),
-            const Padding(
-                padding: EdgeInsets.only(top: 30, bottom: 20),
-                child: Text(
-                  "Tecnologias utilizadas:",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: fontSize,
-                      fontFamily: "Righteous"),
-                  textAlign: TextAlign.center,
-                )),
-            Padding(
-                padding: const EdgeInsets.only(bottom: fontSize * 1.2),
+                padding: const EdgeInsets.all(16),
+                alignment: Alignment.center,
                 child: Wrap(
-                  spacing: 20,
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxWidth: size.width * .4,
-                          maxHeight: size.height * .15),
-                      child: Image.asset(
-                        "images/dart_icon.png",
-                        height: size.height,
+                    SizedBox(
+                      width: mobile ? size.width * .9 : size.width * .35,
+                      child: const Text(
+                        "Esse projeto foi criado como trabalho de conclusão de curso "
+                        "para a instituição universitária Libertas Faculdades Integradas, "
+                        "no curso de Sistemas de Informação.",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: fontSize,
+                            fontFamily: "Righteous"),
                       ),
                     ),
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxWidth: size.width * .4,
-                          maxHeight: size.height * .15),
-                      child: Image.asset(
-                        "images/flutter_icon.png",
-                        height: size.height,
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxHeight: size.height * .3,
+                              minWidth: size.width * .35),
+                          child: Image.asset(
+                            "images/libertas_logo.png",
+                            color: primaryColor,
+                            height: size.height,
+                          )),
                     ),
                   ],
-                )),
-            Padding(
-              padding: const EdgeInsets.only(top: 90, bottom: 30),
-              child: logo(fontSize * 1.5),
-            ),
-          ],
+                ),
+              ),
+              const Padding(
+                  padding: EdgeInsets.only(top: 25, bottom: 40),
+                  child: Text(
+                    "Tecnologias utilizadas:",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: fontSize * 1.2,
+                        fontFamily: "Righteous"),
+                    textAlign: TextAlign.center,
+                  )),
+              Wrap(
+                    spacing: 20,
+                    children: [
+                      Image.asset("images/dart_icon.png",
+                          // width: mobile ? size.width * .4 : size.width * .16
+                        height: 128,
+                      ),
+                      Image.asset("images/flutter_icon.png",
+                          // width: mobile ? size.width * .4 : size.width * .16
+                        height: 128,
+                      ),
+                    ],
+                  ),
+              Padding(
+                padding: const EdgeInsets.only(top: 90, bottom: 30),
+                child: logo(fontSize * 1.5),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
@@ -253,70 +254,25 @@ class _InfoPageState extends State<InfoPage> {
                     ],
                   ),
                 ),
-                Container(
-                    padding: const EdgeInsets.all(20),
-                    width: mobile ? size.width * .9 : size.width * .45,
-                    height: mobile ? size.height * .6 : size.height * .4,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: primaryColor,
-                            style: BorderStyle.solid,
-                            width: 4),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          ListView(
-                            shrinkWrap: true,
-                            children: _platformData.entries
-                                .map(
-                                  (e) => Padding(
-                                    padding: const EdgeInsets.only(bottom: 15),
-                                    child: RichText(
-                                        text: TextSpan(
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Righteous",
-                                                fontSize: fontSize),
-                                            children: [
-                                          TextSpan(
-                                              text: e.key.toString() + ": ",
-                                              style: const TextStyle(
-                                                  color: primaryColor,
-                                                  fontWeight: FontWeight.bold)),
-                                          TextSpan(text: e.value.toString()),
-                                        ])),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                          ListView(
-                            shrinkWrap: true,
-                            children: _locationData.entries
-                                .map(
-                                  (e) => Padding(
-                                    padding: const EdgeInsets.only(bottom: 15),
-                                    child: RichText(
-                                        text: TextSpan(
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Righteous",
-                                                fontSize: fontSize),
-                                            children: [
-                                          TextSpan(
-                                              text: e.key.toString() + ": ",
-                                              style: const TextStyle(
-                                                  color: primaryColor,
-                                                  fontWeight: FontWeight.bold)),
-                                          TextSpan(text: e.value.toString()),
-                                        ])),
-                                  ),
-                                )
-                                .toList(),
-                          )
-                        ],
-                      ),
-                    ))
+                ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: 100),
+                  child: Container(
+                      padding: const EdgeInsets.all(20),
+                      width: mobile ? size.width * .9 : size.width * .45,
+                      height: size.height * .4,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: primaryColor,
+                              style: BorderStyle.solid,
+                              width: 4),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: getInformationList(),
+                        ),
+                      )),
+                )
               ],
               width: size.width,
               background: false,
@@ -325,6 +281,51 @@ class _InfoPageState extends State<InfoPage> {
         ),
       ),
     );
+  }
+
+  List<Widget> getInformationList() {
+    List<Widget> information = [];
+    information.addAll(_platformData.entries
+        .map(
+          (e) => Padding(
+            padding: const EdgeInsets.only(bottom: 15),
+            child: RichText(
+                text: TextSpan(
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Righteous",
+                        fontSize: fontSize),
+                    children: [
+                  TextSpan(
+                      text: e.key.toString() + ": ",
+                      style: const TextStyle(
+                          color: primaryColor, fontWeight: FontWeight.bold)),
+                  TextSpan(text: e.value.toString()),
+                ])),
+          ),
+        )
+        .toList());
+    information.addAll(_locationData.entries
+        .map(
+          (e) => Padding(
+            padding: const EdgeInsets.only(bottom: 15),
+            child: RichText(
+                text: TextSpan(
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Righteous",
+                        fontSize: fontSize),
+                    children: [
+                  TextSpan(
+                      text: e.key.toString() + ": ",
+                      style: const TextStyle(
+                          color: primaryColor, fontWeight: FontWeight.bold)),
+                  TextSpan(text: e.value.toString()),
+                ])),
+          ),
+        )
+        .toList());
+    return information;
   }
 
   Widget phishingView(BuildContext context) {
@@ -374,7 +375,7 @@ class _InfoPageState extends State<InfoPage> {
                       children: [
                     TextSpan(
                         text:
-                            "    O e-mail que redirecionou você para esta página foi usado para simular um ataque de phishing. "
+                            "O e-mail que redirecionou você para esta página foi usado para simular um ataque de phishing. "
                             "Nenhum dado sensível está sendo coletado, mas se você veio parar aqui pode ser um "
                             "sinal de que está suscetível a ser pego por ataques reais de criminosos reais!\n"
                             "Você não quer entrar para o grupo das pessoas que tiveram seus dados comprometidos."),
@@ -382,43 +383,28 @@ class _InfoPageState extends State<InfoPage> {
               Wrap(
                 crossAxisAlignment: WrapCrossAlignment.start,
                 alignment: WrapAlignment.start,
+                direction: Axis.horizontal,
                 children: [
                   RichText(
-                      text: const TextSpan(
-                          style: TextStyle(
+                      text: TextSpan(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontFamily: "Righteous",
                               fontSize: fontSize),
                           children: [
-                        TextSpan(
+                        const TextSpan(
                             text:
                                 "Para saber como se proteger de ataques como esse dê uma olhada na nossa página "),
+                        TextSpan(
+                            text: takeCarePage.title,
+                            style: const TextStyle(color: Colors.red),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushNamed(
+                                    context, takeCarePage.path!);
+                              }),
+                        const TextSpan(text: ".")
                       ])),
-                  InkWell(
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    child: Text(
-                      takeCarePage.title,
-                      style: TextStyle(
-                          color: primaryColor,
-                          fontSize: fontSize,
-                          decoration: decoration),
-                    ),
-                    onHover: (isHovering) {
-                      setState(() {
-                        decoration = isHovering
-                            ? TextDecoration.underline
-                            : TextDecoration.none;
-                      });
-                    },
-                    onTap: () =>
-                        Navigator.pushNamed(context, takeCarePage.path!),
-                  ),
-                  const Text(
-                    ".",
-                    style: TextStyle(color: Colors.white, fontSize: fontSize),
-                  )
                 ],
               ),
             ],

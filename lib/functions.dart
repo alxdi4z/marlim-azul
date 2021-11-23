@@ -37,7 +37,6 @@ Future saveAccess(bool byMessage, bool byEmail, {String? email}) async {
           "Access-Control_Allow_Origin": "*"
         },
         body: json.encode(body));
-    print(res.body.toString());
   } catch (e) {
     print(e.toString());
   }
@@ -58,7 +57,6 @@ Future saveLocation(String? latitude, String? longitude) async {
           "Access-Control_Allow_Origin": "*"
         },
         body: json.encode(body));
-    print(res.body.toString());
   } catch (e) {
     print(e.toString());
   }
@@ -82,7 +80,6 @@ Future saveBrowserInfo(Map<String, dynamic> info) async {
           "Access-Control_Allow_Origin": "*"
         },
         body: json.encode(body));
-    print(res.body.toString());
   } catch (e) {
     print(e.toString());
   }
